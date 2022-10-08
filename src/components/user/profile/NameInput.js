@@ -13,7 +13,7 @@ const NameInput = (props) => {
 
 
     return (
-        <Row>
+        <Row className="mt-2">
             <Col md={6}>
                 <FormGroup>
                     <Label for="lastname" className="profile-lable">
@@ -25,6 +25,8 @@ const NameInput = (props) => {
                         type="text"
                         value={lastname} maxLength={25}
                         onChange={(e) => handleLastnameInput(e)}
+                        required
+                        autoComplete="off"
                     />
                 </FormGroup>
             </Col>
@@ -39,6 +41,8 @@ const NameInput = (props) => {
                         type="text"
                         value={fistname} maxLength={25}
                         onChange={(e) => handleFirstnameInput(e)}
+                        required
+                        autoComplete="off"
                     />
                 </FormGroup>
             </Col>

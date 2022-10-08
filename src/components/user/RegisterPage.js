@@ -40,7 +40,10 @@ const RegisterPage = (props) => {
         setPassword(e.target.value)
     }
 
+
     const handleRegisterForm = async (e) => {
+        e.preventDefault();
+        
         if (usernameToggle && passwordToggle) {
             const res = await fetch(`${api}/user/save`, {
                 method: "POST",
@@ -70,13 +73,16 @@ const RegisterPage = (props) => {
 
 
     return (
-        <Form className="register-form">
+        <Form className="register-form" onSubmit={handleRegisterForm}>
             <FormGroup className="position-relative">
                 <Label for="username">
                     Tài khoản
                 </Label>
                 <Input valid={usernameToggle && username.length !== 0} invalid={!usernameToggle && username.length !== 0}
-                    value={username} onChange={(e) => handleUsernameInput(e)} disabled={disabledInput} />
+                    value={username} onChange={(e) => handleUsernameInput(e)} disabled={disabledInput} 
+                    required
+                    autoComplete="off"
+                    />
                 <FormFeedback
                     tooltip
                     className="mt-1"
@@ -101,6 +107,8 @@ const RegisterPage = (props) => {
                     className="mt-1"
                     invalid={(!passwordToggle).toString()}
                     valid={passwordToggle}
+                    required
+                    autoComplete="off"
 
                 >
                     {(passwordToggle === false) ? 'Mật khẩu phải chứa từ 8 đến 50 kí tự, chỉ gôm chữ cái a-z, A-Z và 0-9'
@@ -123,7 +131,7 @@ const RegisterPage = (props) => {
             <hr className="mb-4" />
 
             <Button color="primary" block={true} size="lg"
-                className="register-button" onClick={(e) => handleRegisterForm(e)}
+                className="register-button" type="submit"
             >
                 Đăng ký
             </Button>

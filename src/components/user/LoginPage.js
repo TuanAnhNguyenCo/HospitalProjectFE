@@ -52,7 +52,7 @@ const LoginPage = (props) => {
     }
 
     return (
-        <Form className="login-context">
+        <Form className="login-context" onSubmit={handleLoginForm}>
             <FormGroup className="position-relative" floating>
 
                 <Input
@@ -76,6 +76,7 @@ const LoginPage = (props) => {
                     type="password"
                     size={30}
                     required
+                    autoComplete="off"
                     value={password}
                     onChange={(e) => handlePassowrdInput(e)
                     }
@@ -92,7 +93,7 @@ const LoginPage = (props) => {
                 block={true}
                 size='lg'
                 className="login-button"
-                onClick={(e) => handleLoginForm(e)}
+                type="submit"
             >
                 Đăng nhập
             </Button >
