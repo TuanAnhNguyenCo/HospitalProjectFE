@@ -4,6 +4,8 @@ import InfoInput2 from "../../components/user/profile/InfoInput2"
 import { Form, Button } from "reactstrap"
 import './profileSetup.scss'
 import { useState } from "react"
+import { isEmail } from "../../regex/validForm"
+import { ErrorFormMessage } from "../../utils/announce/ErrorMessage"
 
 const ProfileSetup = () => {
     const [lastname, setLastname] = useState('')
@@ -16,9 +18,27 @@ const ProfileSetup = () => {
     const [email, setEmail] = useState('')
     const [job, setJob] = useState("")
     const [ethnic, setEthnic] = useState("")
+    const [err_mess,setErrMess] = useState(false)
+    const error_message = "Bạn vui lòng điền đầy đủ thông tin"
+
+    const checkValidInfo = () => {
+        if (!lastname || !fistname || !citizen_identication|| !date_of_birth||!sex||
+            !phoneNumber || !address || !email || !job || !isEmail.test(email))
+            return false
+        return true
+    }
 
     const handleSaveProfile = (e) => {
         e.preventDefault();
+        const valid = checkValidInfo()
+        console.log(valid, !isEmail.test(email))
+        if(valid)
+        {
+            setErrMess(false)
+        }else{
+            setErrMess(true)
+        }
+
     }
 
 
@@ -44,6 +64,8 @@ const ProfileSetup = () => {
                     job: job, setJob: setJob,
                     ethnic: ethnic, setEthnic: setEthnic
                 }} />
+                {err_mess && <ErrorFormMessage error_message = {error_message} />}
+                <hr/>
                 <Button color="primary" size="lg" block={true} className="mt-2"
                     type='submit'
                 >

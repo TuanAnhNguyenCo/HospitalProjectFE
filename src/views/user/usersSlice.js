@@ -35,7 +35,6 @@ export const fetchGetUser = createAsyncThunk('users/info', async () => {
     if (res.status === 200)
     {
         const data = await res.json()
-        console.log(data)
         return [true, data]
     }
     return [false, null]

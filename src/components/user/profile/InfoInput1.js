@@ -18,7 +18,8 @@ const InfoInput1 = (props) => {
         setSex(option.value)
     }
     const handleCitizenIdentication = (e) => {
-        setCitizen_identication(e.target.value)
+        if (!isText.test(e.target.value)) // Nếu là số thì cho nhập
+            setCitizen_identication(e.target.value)
     }
     const handleDateOfBirth = (e) => {
         setDate_of_birth(e.target.value)
@@ -47,6 +48,7 @@ const InfoInput1 = (props) => {
                             value={citizen_identication}
                             maxLength={12}
                             required
+                            type="text"
                             autoComplete="off"
                         />
                     </FormGroup>
